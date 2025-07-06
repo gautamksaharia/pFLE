@@ -1,2 +1,10 @@
 # pFLE
-PINN for Plasma
+# PINN Soliton Simulation
+
+A Physics-Informed Neural Network to simulate a 1-soliton solution of Fokas Lenells Equation using PyTorch.
+
+## Features
+
+- Custom PINN model with `nn.Tanh` activation
+- 1-soliton solution as target
+- Adam + L-BFGS optimization
