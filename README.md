@@ -1,7 +1,7 @@
 # pFLE
 # PINN Soliton Simulation
 
-A Physics-Informed Neural Network to simulate a 1-soliton solution of Fokas Lenells Equation using PyTorch.
+A Physics-Informed Neural Network to simulate bright soliton of the perturbed Fokas Lenells Equation using PyTorch.
 
 ## Features
 
