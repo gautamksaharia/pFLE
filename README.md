@@ -1,5 +1,5 @@
 # pFLE
-# Simulation of ion Cyclotron wave under Pertubation
+# Simulation of ion Cyclotron wave under Perturbation
 
 A Physics-Informed Neural Network to simulate bright soliton of the perturbed Fokas Lenells Equation using PyTorch.
 
