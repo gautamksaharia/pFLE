@@ -9,8 +9,10 @@ from model import PINN
 L = 5.0  # Domain size
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+# 1-soliton exact solution (from FLE Lashkin Paper :
+# Perturbation theory for solitons of the Fokas-Lenells equation: Inverse scattering transform approach
+# https://doi.org/10.1103/PhysRevE.103.042203
 
-# --- 1-soliton exact solution ---
 def u_1soliton(x, t):
     Delta = 1.0
     gamma = 1.0
@@ -20,7 +22,7 @@ def u_1soliton(x, t):
     return U
 
 
-# --- Initial condition ---
+# Initial condition 
 def r0(x):
     u = u_1soliton(x, t=0)
     return u.real
@@ -30,7 +32,7 @@ def m0(x):
     return u.imag
 
 
-# --- Boundary conditions (zero here) ---
+# Boundary conditions (vanishing boundary condition, zero here)
 def bcL(x, t):
     u = u_1soliton(x, t)
     return 0 * u.real
@@ -40,7 +42,7 @@ def bcR(x, t):
     return 0 * u.real
 
 
-# --- Derivative helpers ---
+# Derivative
 def compute_derivatives(f, x, t):
     f_x = torch.autograd.grad(f, x, grad_outputs=torch.ones_like(f), create_graph=True)[0]
     f_t = torch.autograd.grad(f, t, grad_outputs=torch.ones_like(f), create_graph=True)[0]
@@ -48,7 +50,7 @@ def compute_derivatives(f, x, t):
     return f_x, f_t, f_xt
 
 
-# --- PDE Residuals ---
+# PDE Residuals
 def compute_residuals(net, x, t):
     x.requires_grad_(True)
     t.requires_grad_(True)
@@ -58,14 +60,15 @@ def compute_residuals(net, x, t):
     r_x, _, r_xt = compute_derivatives(r, x, t)
     m_x, _, m_xt = compute_derivatives(m, x, t)
 
-    # Modified nonlinear Schrödinger-like residuals
+    # Fokas Lenells equation with pertubation
+    # linear damping perturbation
     res_r = r_xt - r - (r**2 + m**2) * m_x + 0.1 * r_x
     res_m = m_xt - m + (r**2 + m**2) * r_x + 0.1 * m_x
 
     return res_r, res_m
 
 
-# --- Loss function ---
+# Loss function
 def loss_function(net, x_colloc, t_colloc, n_ib, generate_initial_points, generate_boundary_points):
     # PDE residual loss
     res_r, res_m = compute_residuals(net, x_colloc, t_colloc)
