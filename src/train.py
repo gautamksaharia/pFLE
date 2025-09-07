@@ -1,6 +1,14 @@
 # src/train.py
 import torch
 
+
+# train with Adam and L Bfgs
+#Adam (Adaptive Moment Estimation), First-order optimizer (uses gradients only).
+# Adam is excellent for initial training, especially because PDE residuals can be highly irregular in the beginning.
+#L-BFGS (Limited-memory Broyden–Fletcher–Goldfarb–Shanno) Quasi-Newton optimizer (approximates second-order information).
+# L-BFGS is excellent for fine-tuning once Adam has gotten close to a good solution
+
+
 def train_with_adam_then_lbfgs(net, loss_function, generate_collocation_points, n_adam_epochs=1000, n_colloc=1000, n_ib=500):
     optimizer = torch.optim.Adam(net.parameters(), lr=1e-3)
     for epoch in range(n_adam_epochs):
