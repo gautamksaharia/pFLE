@@ -4,7 +4,7 @@ import torch
 import numpy as np
 import matplotlib.pyplot as plt
 
-# --- Plotting function ---
+# Plotting function
 def plot_outputs(net, x_range=(-5, 5), t_range=(0, 1), resolution=100):
     net.eval()  # Set model to eval mode
 
@@ -27,7 +27,7 @@ def plot_outputs(net, x_range=(-5, 5), t_range=(0, 1), resolution=100):
         m = out[:, 1].cpu().numpy().reshape(resolution, resolution)
         u_abs = np.sqrt(r**2 + m**2)
 
-    # Plot the magnitude of u(x, t)
+    # Plot the desnity plot of u(x, t)
     plt.figure(figsize=(6, 5))
     plt.contourf(X.numpy(), T.numpy(), u_abs, 100, cmap='viridis')
     plt.colorbar(label='|u(x,t)|')
