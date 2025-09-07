@@ -15,7 +15,7 @@ net = PINN([2, 32, 32, 32, 2])  # Input: (x,t), Output: (r,m)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 net.to(device)
 
-# --- Training ---
+# Training 
 train_with_adam_then_lbfgs(
     net=net,
     loss_function=lambda x, t, n: loss_function(
@@ -26,5 +26,5 @@ train_with_adam_then_lbfgs(
     n_ib=500
 )
 
-# --- Plotting ---
+# Plotting
 plot_outputs(net)
