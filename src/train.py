@@ -26,7 +26,7 @@ def train_with_adam_then_lbfgs(net, loss_function, generate_collocation_points, 
         optimizer_lbfgs.zero_grad()
         x, t = generate_collocation_points(n_colloc)
         loss = 0.1 * physics_loss + ic_loss + bc_loss
-        loss.backward()
+        loss.backward(retain_graph=True) # Add retain_graph=True here
         return loss
 
     optimizer_lbfgs = torch.optim.LBFGS(net.parameters(), max_iter=15000, line_search_fn="strong_wolfe")
