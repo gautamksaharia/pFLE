@@ -269,7 +269,7 @@ def plot_outputs(net, x_range=(-L, L), t_range=(t0, tmax), resolution=100):
     axes[0].set_ylabel(r"$|u(x,t)|$")
     for ax in axes:
         ax.set_xlabel("x")
-    plt.savefig("soliton_snapshot_third0.pdf", dpi=300, bbox_inches="tight")  # high-res save
+    #plt.savefig("soliton_snapshot_third0.pdf", dpi=300, bbox_inches="tight")  # high-res save
     plt.show()
     
     
@@ -292,7 +292,7 @@ def plot_outputs(net, x_range=(-L, L), t_range=(t0, tmax), resolution=100):
     ax.set_title(r" $|u(x,t)|$")
     ax.grid(False)  # cleaner look
     plt.tight_layout()
-    plt.savefig("density_third0.pdf", dpi=300, bbox_inches="tight")  # save high-res
+    #plt.savefig("density_third0.pdf", dpi=300, bbox_inches="tight")  # save high-res
     plt.show()
 
 
@@ -357,50 +357,3 @@ plt.plot( u_abs[:, 0])
 plt.plot(u_abs[:, -1])
 plt.show()
 
-
-
-U0 = u_1soliton(x, t=0)
-U5 = u_1soliton(x, t=10)
-plt.plot(np.abs(U0))
-plt.plot(np.abs(U5))
-plt.show()
-
-plt.plot( u_abs[:, 0])
-plt.plot(np.abs(U0))
-plt.title("compare at t=0")
-plt.show()
-
-
-def spectral_domain(psi):
-    plt.rcParams.update({
-        "font.size": 14,
-        "axes.labelsize": 16,
-        "axes.titlesize": 16,
-        "xtick.labelsize": 12,
-        "ytick.labelsize": 12,
-    })
-    
-    N = psi.shape[1]
-    nt = psi.shape[0]
-    kx = fftfreq(N, 1/N)
-    kx_shift = fftshift(kx)
-    psi_fft_list=[]
-    for i in range(N):
-        psi_fft = fft(psi[:, i])
-        psi_fft_shift = fftshift(psi_fft)
-        psi_fft_list.append(psi_fft_shift)
-    
-
-    fig, ax = plt.subplots(figsize=(5, 7))
-    contour = ax.contourf(kx_shift, np.linspace(0,tmax, nt), np.abs(psi_fft_list), 
-                      levels=100, cmap='plasma')
-    cbar = plt.colorbar(contour, ax=ax)
-
-    ax.set_xlabel(r"wave number $k$")
-    ax.set_ylabel(r"$t$")
-    ax.set_title(r" $|u(x,t)|$")
-    ax.grid(False)  # cleaner look
-    plt.tight_layout()
-    plt.show()
-
-spectra = spectral_domain(u_abs)
