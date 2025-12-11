@@ -5,5 +5,5 @@ Physics-Informed Neural Network(PyTorch) to simulate bright soliton of the pertu
 
 ## Features
 
-- Custom PINN model with `nn.Tanh` activation
+- Custom PINN model with SIREN
 - Adam + L-BFGS optimization
