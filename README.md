@@ -16,4 +16,8 @@ Data generation scripts are available in the [`data`](data) folder in respective
 - [Linear Damping in Collisional Plasma](src/LinearDamping-collisional)
 - [Linear Damping in Collisionless Plasma](src/LinearDamping-collisionless)
 - [Stochastic Perturbation](src/stochastic-perturbation)
+
+## Code
+All code is provided in the [`src`](src) folder
+
   
