@@ -11,7 +11,7 @@ Physics-Informed Neural Network(PyTorch) to simulate bright soliton of the pertu
 
 ## Datasets
 
-Data generation scripts are available in the [`data`](data) folder in respective experiment:
+Data generated for this research are available in the [`data`](data) folder of the respective experiment:
 
 - [Linear Damping in Collisional Plasma](src/LinearDamping-collisional)
 - [Linear Damping in Collisionless Plasma](src/LinearDamping-collisionless)
