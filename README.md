@@ -1,5 +1,4 @@
-# pFLE
-# Dynamics of ion Cyclotron wave under Perturbation
+# Dynamics of Ion Cyclotron wave under Perturbation using Physics Informed Neural Networks
 
 Physics-Informed Neural Network(PyTorch) to simulate bright soliton of the perturbed Fokas Lenells Equation.
 
